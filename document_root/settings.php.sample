@@ -1,0 +1,8 @@
+<?php
+$databaseConnection = new MysqlConnectionData(
+        'localhost',
+        3306,
+        'chordis_usr',
+        'password',
+        'chordis_db'
+);
