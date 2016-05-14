@@ -76,6 +76,14 @@ function getPOSTParameter($varname, $defaultVal = null) {
     }
 }
 
+function getPUTParameter($varname, $defaultVal = null) {
+    if (isset($_PUT[$varname])) {
+        return condStrip($_PUT[$varname]);
+    } else {
+        return $defaultVal;
+    }
+}
+
 function getCookieParameter($varname, $defaultVal = null) {
     if (isset($_COOKIE[$varname])) {
         return condStrip($_COOKIE[$varname]);
@@ -88,6 +96,9 @@ function getGPParameter($varname, $defaultvalue = null) {
     $ret = getPOSTParameter($varname);
     if ($ret === null) {
         $ret = getGETParameter($varname);
+    }
+    if ($ret === null) {
+        $ret = getPUTParameter($varname);
     }
     if ($ret === null) {
         $ret = $defaultvalue;

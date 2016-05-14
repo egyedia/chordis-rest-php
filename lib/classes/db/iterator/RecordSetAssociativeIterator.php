@@ -18,14 +18,14 @@ class RecordSetAssociativeIterator implements Iterator {
     }
 
     public function next() {
-        $this->row = mysql_fetch_assoc($this->result);
+        $this->row = mysqli_fetch_assoc($this->result);
         if ($this->row !== false) {
             $this->key ++;
         }
     }
 
     public function rewind() {
-        $this->row = mysql_fetch_assoc($this->result);
+        $this->row = mysqli_fetch_assoc($this->result);
         $this->key = 0;
     }
 

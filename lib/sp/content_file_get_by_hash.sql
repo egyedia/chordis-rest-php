@@ -1,12 +1,8 @@
---iterator
+--singleRowOrNull
 SELECT
     cfile.id as fileid,
-    cfile.title,
-    cfile.artist,
-    cfile.album,
-    cfile.name,
-    cfile.content_type,
     cfolder.id as folderid,
+    cfile.*,
     cfolder.path,
     rfile.rating
 FROM
@@ -20,6 +16,4 @@ LEFT JOIN
 ON
     cfile.hash = rfile.hash
 WHERE
-    cfile.artist LIKE "%#artist#%"
-ORDER BY
-    cfile.artist, cfile.title, cfile.name
+    cfile.hash = {hash}

@@ -53,7 +53,9 @@ class WebSiteController {
             'FolderAndFileTreeData',
             'ArtistListData',
             'SongsByArtistData',
-            'TitleListData'
+            'TitleListData',
+	    'RatingListData',
+	    'RatingData'
         );
     }
 

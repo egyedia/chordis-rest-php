@@ -23,6 +23,7 @@ class SongsByArtistDataPageManager extends ChordsObject {
                 'album' => $song['album'],
                 'folderid' => $song['folderid'],
                 'path' => $song['path'],
+                'rating' => $song['rating']
             );
             $jr[] = $r;
         }

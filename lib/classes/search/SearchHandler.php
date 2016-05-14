@@ -190,9 +190,11 @@ class SearchHandler {
                         $spUpdateFolderTA->execute();
                     } else {
                         //echo "FILE: $relativeParent|$fn<br>\n";
+			$hash = md5($relativeParent. '/'.$fn);
                         $this->reportStatus("Detecting structure", $relative, $i);
                         $spInsertFile->setParameter('parent_id', $ownerId);
                         $spInsertFile->setParameter('name', $fn);
+			$spInsertFile->setParameter('hash', $hash);
                         $spInsertFile->setParameter('title', $this->extractTag($content, 'title'));
                         $spInsertFile->setParameter('artist', $this->extractTag($content, 'artist'));
                         $spInsertFile->setParameter('album', $this->extractTag($content, 'album'));

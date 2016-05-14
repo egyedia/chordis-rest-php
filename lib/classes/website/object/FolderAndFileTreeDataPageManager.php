@@ -23,7 +23,7 @@ class FolderAndFileTreeDataPageManager extends ChordsObject {
                 'id' => 'F' . $folder['id'],
                 'text' => $folder['name'],
                 'parent' => $folder['parent_id'] == 0 ? '#' : 'F' . $folder['parent_id'],
-                'icon' => 'f'
+                'icon' => 'font-svg-folder2'
             );
             $jr[] = $r;
         }
@@ -36,7 +36,7 @@ class FolderAndFileTreeDataPageManager extends ChordsObject {
                 'id' => 'S' . $song['fileid'],
                 'text' => $song['name'],
                 'parent' => 'F' . $song['folderid'],
-                'icon' => (($song['content_type'] == 'chord') ? 'c' : 'l'),
+                'icon' => (($song['content_type'] == 'chord') ? 'font-svg-chords' : 'font-svg-lyrics'),
                 /*'a_attr' => array(
                     "href" => '/song/' . $song['fileid']
                 )*/

@@ -4,6 +4,7 @@ INSERT INTO
 SET
     name = {name},
     parent_id = {parent_id},
+    hash = {hash},
     content = {content},
     content_type = {content_type},
     title = {title},

@@ -25,20 +25,20 @@ abstract class SP {
         }
         //debug($this->query);
         if ($this->db !== null) {
-            $this->result = mysql_query($this->query, $this->db->getLink());
+            $this->result = mysqli_query($this->db->getLink(), $this->query);
         } else {
-            $this->result = mysql_query($this->query);
+            $this->result = mysqli_query($this->query);
         }
         if ($this->result === false) {
             //--exit;
-            debug('Query error in ' . $this->getClassName() . ':' . mysql_error() . ':' . $this->query);
+            debug('Query error in ' . $this->getClassName() . ':' . mysqli_error() . ':' . $this->query);
             exit;
         }
     }
 
     public function getAssociativeResultSet() {
         $ret = array();
-        while ($row = mysql_fetch_assoc($this->result)) {
+        while ($row = mysqli_fetch_assoc($this->result)) {
             $ret[] = $row;
         }
         return $ret;
@@ -46,7 +46,7 @@ abstract class SP {
 
     public function getNumericResultSet() {
         $ret = array();
-        while ($row = mysql_fetch_row($this->result)) {
+        while ($row = mysqli_fetch_row($this->result)) {
             $ret[] = $row;
         }
         return $ret;
@@ -58,22 +58,22 @@ abstract class SP {
     }
 
     public function getRowNum() {
-        return mysql_num_rows($this->result);
+        return mysqli_num_rows($this->result);
     }
 
     public function getInsertedID() {
         if ($this->db !== null) {
-            return mysql_insert_id($this->db->getLink());
+            return mysqli_insert_id($this->db->getLink());
         } else {
-            return mysql_insert_id();
+            return mysqli_insert_id();
         }
     }
 
     public function getAffectedRows() {
         if ($this->db !== null) {
-            return mysql_affected_rows($this->db->getLink());
+            return mysqli_affected_rows($this->db->getLink());
         } else {
-            return mysql_affected_rows();
+            return mysqli_affected_rows();
         }
     }
 

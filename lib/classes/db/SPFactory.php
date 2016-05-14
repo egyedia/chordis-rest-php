@@ -13,7 +13,7 @@ class SPFactory {
         } else {
             $this->pathToSPs = $globalImportPrefix . '../' . $relativePathToSPs;
         }
-        mysql_query("SET NAMES 'utf8'", $db->getLink());
+        mysqli_query($db->getLink(), "SET NAMES 'utf8'");
     }
 
     /**

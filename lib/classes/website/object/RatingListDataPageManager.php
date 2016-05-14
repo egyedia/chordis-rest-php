@@ -1,6 +1,6 @@
 <?php
 
-class TitleListDataPageManager extends ChordsObject {
+class RatingListDataPageManager extends ChordsObject {
 
     public function __construct($requestContext) {
         parent::__construct($requestContext);
@@ -9,7 +9,7 @@ class TitleListDataPageManager extends ChordsObject {
     public function performAction() {
         $jr = array();
 
-        $sp = $this->SPF->getSP('content_file_list_all_titles');
+        $sp = $this->SPF->getSP('content_file_list_all_rated');
         $songList = $sp->execute();
 
         foreach ($songList as $song) {
@@ -22,7 +22,7 @@ class TitleListDataPageManager extends ChordsObject {
                 'album' => $song['album'],
                 'folderid' => $song['folderid'],
                 'path' => $song['path'],
-                'rating' => $song['rating']
+		'rating' => $song['rating']
             );
             $jr[] = $r;
         }

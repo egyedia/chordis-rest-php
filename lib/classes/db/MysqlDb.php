@@ -11,16 +11,10 @@ class MysqlDb {
         $password = $connectionData->getPassword();
         $port = $connectionData->getPort();
 
-        $this->link = mysql_connect("$host:$port", $user, $password, true);
+        $this->link = mysqli_connect($host, $user, $password, $database, $port);
         if (!$this->link) {
-            //debug('DB error: '.mysql_error());
+            //debug('DB error: '.mysqli_error());
             exit();
-        } else {
-            $dbSel = mysql_select_db($database);
-            if (!$dbSel) {
-                //debug('DB error: '.mysql_error());
-                exit();
-            }
         }
     }
 

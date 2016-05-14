@@ -18,14 +18,14 @@ class RecordSetNumericIterator implements Iterator {
     }
 
     public function next() {
-        $this->row = mysql_fetch_array($this->result, MYSQL_NUM);
+        $this->row = mysqli_fetch_array($this->result, MYSQL_NUM);
         if ($this->row !== false) {
             $this->key ++;
         }
     }
 
     public function rewind() {
-        $this->row = mysql_fetch_array($this->result, MYSQL_NUM);
+        $this->row = mysqli_fetch_array($this->result, MYSQL_NUM);
         $this->key = 0;
     }
 

@@ -8,18 +8,19 @@ SELECT
     cfile.name,
     cfolder.path,
     cfolder.id as folderid,
-    rfile.rating
+    rating
 FROM
     content_file as cfile
 LEFT JOIN
     content_folder as cfolder
 ON
     cfile.parent_id = cfolder.id
-LEFT JOIN
+INNER JOIN
     rating_file as rfile
 ON
     cfile.hash = rfile.hash
+WHERE
+    rating > 0
 ORDER BY
     cfile.title,
-    cfile.artist,
-    rating
+    cfile.artist
