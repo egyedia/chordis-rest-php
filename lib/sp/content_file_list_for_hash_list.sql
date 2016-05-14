@@ -12,12 +12,19 @@ SELECT
     cfile.name,
     cfolder.path,
     cfolder.id as folderid,
-    cfile.hash
+    cfile.hash,
+    rfile.rating
 FROM
     content_file as cfile
 LEFT JOIN
     content_folder as cfolder
 ON
     cfile.parent_id = cfolder.id
+LEFT JOIN
+    rating_file as rfile
+ON
+    cfile.hash = rfile.hash
+WHERE
+    cfile.hash in (#hash_list#)
 ORDER BY
     cfile.name

@@ -12,5 +12,6 @@ define('LUCENE_INDEX_MUSIC', 'mus');
 define('LUCENE_INDEX_LYRICS', 'lyr');
 define('LUCENE_INDEX_CONTENT_TYPE', 'ct');
 define('LUCENE_INDEX_INDEXABLE_CONTENT', 'text');
+define('LUCENE_INDEX_HASH', 'hash');
 
 define('ORIGINAL_REQUEST_PAGE_NAME', 'originalRequestPageName');

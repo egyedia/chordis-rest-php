@@ -3,6 +3,7 @@
 class SearchResultSongRow extends SongDocument {
 
     private $score;
+    private $rating;
 
     function __construct() {
         //sparent::__construct();
@@ -15,13 +16,21 @@ class SearchResultSongRow extends SongDocument {
     public function setScore($score) {
         $this->score = $score;
     }
-    
+
     public function getKey() {
-        return $this->fileid;
+        return $this->getHash();
     }
-    
+
     public function getDisplayName() {
         return $this->getArtist() . ' - ' . $this->getTitle();
+    }
+
+    function getRating() {
+        return $this->rating;
+    }
+
+    function setRating($rating) {
+        $this->rating = $rating;
     }
 
     public static function fromHitDocument($hd, $score) {
@@ -38,6 +47,7 @@ class SearchResultSongRow extends SongDocument {
         $p->setMusic($hd->getField(LUCENE_INDEX_MUSIC)->getUtf8Value());
         $p->setLyrics($hd->getField(LUCENE_INDEX_LYRICS)->getUtf8Value());
         $p->setContentType($hd->getField(LUCENE_INDEX_CONTENT_TYPE)->getUtf8Value());
+        $p->setHash($hd->getField(LUCENE_INDEX_HASH)->getUtf8Value());
         return $p;
     }
 

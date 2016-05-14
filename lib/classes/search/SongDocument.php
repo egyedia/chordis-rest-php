@@ -14,8 +14,9 @@ class SongDocument {
     private $lyrics;
     private $content;
     private $contentType;
+    private $hash;
 
-    function __construct($fileid, $name, $path, $folderid, $title, $artist, $album, $year, $music, $lyrics, $content, $contentType) {
+    function __construct($fileid, $name, $path, $folderid, $title, $artist, $album, $year, $music, $lyrics, $content, $contentType, $hash) {
         $this->fileid = $fileid;
         $this->name = $name;
         $this->path = $path;
@@ -28,6 +29,7 @@ class SongDocument {
         $this->lyrics = $lyrics;
         $this->content = $content;
         $this->contentType = $contentType;
+        $this->hash = $hash;
     }
 
     function getFileid() {
@@ -124,6 +126,14 @@ class SongDocument {
 
     function setContentType($contentType) {
         $this->contentType = $contentType;
+    }
+    
+    function getHash() {
+        return $this->hash;
+    }
+
+    function setHash($hash) {
+        $this->hash = $hash;
     }
 
     function getIndexableContent() {

@@ -6,9 +6,7 @@ class SearchResults extends AbstractSongRowList {
     private $maxHitCount;
     private $totalHitCount;
     private $showHitCount;
-
     private $exception;
-
 
     function __construct() {
         parent::__construct();
@@ -37,13 +35,31 @@ class SearchResults extends AbstractSongRowList {
             $this->showHitCount = $this->maxHitCount;
         }
 
-        for($i = 0; $i < $this->showHitCount; $i++) {
+        for ($i = 0; $i < $this->showHitCount; $i++) {
             if (isset($hits[$i])) {
                 $hit = $hits[$i];
                 $hd = $hit->getDocument();
                 $row = SearchResultSongRow::fromHitDocument($hd, $hit->score);
                 $this->addRow($row);
             }
+        }
+    }
+
+    public function getHashList() {
+        $hashList = '';
+        foreach ($this->getRows() as $r) {
+            $hashList .= "'" . $r->getHash() . "',";
+        }
+        if (strlen($hashList) > 0) {
+            $hashList = substr($hashList, 0, strlen($hashList) - 1);
+        }
+        return $hashList;
+    }
+
+    public function decorateSongWithCurrentData($hash, $rating) {
+        $row = $this->getKeyedRow($hash);
+        if ($row !== null) {
+            $row->setRating($rating);
         }
     }
 

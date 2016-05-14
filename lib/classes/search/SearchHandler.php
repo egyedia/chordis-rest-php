@@ -190,11 +190,11 @@ class SearchHandler {
                         $spUpdateFolderTA->execute();
                     } else {
                         //echo "FILE: $relativeParent|$fn<br>\n";
-			$hash = md5($relativeParent. '/'.$fn);
+                        $hash = md5($relativeParent . '/' . $fn);
                         $this->reportStatus("Detecting structure", $relative, $i);
                         $spInsertFile->setParameter('parent_id', $ownerId);
                         $spInsertFile->setParameter('name', $fn);
-			$spInsertFile->setParameter('hash', $hash);
+                        $spInsertFile->setParameter('hash', $hash);
                         $spInsertFile->setParameter('title', $this->extractTag($content, 'title'));
                         $spInsertFile->setParameter('artist', $this->extractTag($content, 'artist'));
                         $spInsertFile->setParameter('album', $this->extractTag($content, 'album'));
@@ -302,13 +302,13 @@ class SearchHandler {
         foreach ($list as $song) {
             //debug($song);
             $doc = new SongDocument(
-                    $song['fileid'], $song['name'], $song['path'], $song['folderid'], $song['title'], $song['artist'], $song['album'], $song['year'], $song['music'], $song['lyrics'], $song['content'], $song['content_type']
+                    $song['fileid'], $song['name'], $song['path'], $song['folderid'], $song['title'], $song['artist'], $song['album'], $song['year'], $song['music'], $song['lyrics'], $song['content'], $song['content_type'], $song['hash']
             );
             $idoc = new IndexableSongDocument($doc);
             $this->index->addDocument($idoc);
             $this->reportStatus("Indexing documents", $song['path'] . '/' . $song['name'], $i);
             $i++;
-            /*if ($i > 300) {
+            /*if ($i > 100) {
                 return;
             }*/
         }
@@ -359,7 +359,20 @@ class SearchHandler {
     }
 
     private function decorateResultWithSongData() {
-        
+        $hashList = $this->sr->getHashList();
+     
+        if (strlen($hashList) > 0) {
+            $sp = $this->SPF->getSP('content_file_list_for_hash_list');
+            $sp->setParameters(
+                    array(
+                        'hash_list' => $hashList
+                    )
+            );
+            $list = $sp->execute();
+            foreach ($list as $song) {
+                $this->sr->decorateSongWithCurrentData($song['hash'], $song['rating']);
+            }
+        }
     }
 
 }

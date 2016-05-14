@@ -18,13 +18,14 @@ class SearchQuickDataPageManager extends ChordsObject {
         foreach ($searchResults->getRows() as $row) {
             //debug($row);
             $r = array(
-                'id' => $row->getFileId(),
+                'fileid' => $row->getFileId(),
                 'title' => $row->getTitle(),
                 'artist' => $row->getArtist(),
                 'folderid' => $row->getFolderId(),
                 'path' => $row->getPath(),
                 'name' => $row->getName(),
-                'contentType' => $row->getContentType()
+                'contentType' => $row->getContentType(),
+                'rating' => $row->getRating()
             );
             $jr[] = $r;
         }
