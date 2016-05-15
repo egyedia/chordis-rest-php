@@ -15,7 +15,7 @@ class SongsByArtistDataPageManager extends ChordsObject {
 
         foreach ($songList as $song) {
             $r = array(
-                'id' => $song['fileid'],
+                'fileid' => $song['fileid'],
                 'artist' => $song['artist'],
                 'title' => $song['title'],
                 'name' => $song['name'],
